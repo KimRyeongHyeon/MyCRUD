@@ -59,13 +59,14 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int i) {
                         switch (i) {
                             case 0:
-                                startActivity(new Intent(getApplicationContext(), DetailActivity.class).putExtra("position", position));
+                                startActivity(new Intent(getApplicationContext(), DetailActivity.class)
+                                        .putExtra("position", position));
                                 break;
                             case 1:
 
                                 break;
                             case 2:
-                                deleteData(position);
+                                deleteData(employeeArrayList.get(position).getId());
                                 break;
                         }
                     }
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         retrieveData();
     }
 
-    private void deleteData(final int position) {
+    private void deleteData(final String id) {
         StringRequest request = new StringRequest(Request.Method.POST, "https://soulstring94.cafe24.com/delete.php",
                 new Response.Listener<String>() {
                     @Override
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("id", String.valueOf(position));
+                params.put("id", id);
 
                 return params;
             }
