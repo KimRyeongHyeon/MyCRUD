@@ -90,6 +90,7 @@ public class AddDataActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<String, String>();
+
                     params.put("name", name);
                     params.put("email", email);
                     params.put("contact", contact);
