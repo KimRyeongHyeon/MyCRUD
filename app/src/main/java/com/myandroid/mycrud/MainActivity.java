@@ -1,10 +1,14 @@
 package com.myandroid.mycrud;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -37,6 +41,36 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.myListView);
         adapter = new MyAdapter(this, employeeArrayList);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                ProgressDialog progressDialog = new ProgressDialog(view.getContext());
+
+                CharSequence[] dialogItem = {"View Data", "Edit Data", "Delete Data"};
+
+                builder.setTitle(employeeArrayList.get(position).getName());
+                builder.setItems(dialogItem, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        switch (i) {
+                            case 0:
+                                startActivity(new Intent(getApplicationContext(), DetailActivity.class).putExtra("position", position));
+                                break;
+                            case 1:
+
+                                break;
+                            case 2:
+
+                                break;
+                        }
+                    }
+                });
+
+                builder.create().show();
+            }
+        });
 
         retrieveData();
     }
