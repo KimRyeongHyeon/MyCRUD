@@ -60,10 +60,11 @@ public class MainActivity extends AppCompatActivity {
                         switch (i) {
                             case 0:
                                 startActivity(new Intent(getApplicationContext(), DetailActivity.class)
-                                        .putExtra("position", position));
+                                .putExtra("position", position));
                                 break;
                             case 1:
-
+                                startActivity(new Intent(getApplicationContext(), EditActivity.class)
+                                .putExtra("position", position));
                                 break;
                             case 2:
                                 deleteData(employeeArrayList.get(position).getId());
